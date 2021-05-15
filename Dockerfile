@@ -1,6 +1,7 @@
 # Linux image used
 FROM alpine
 WORKDIR /root/game
+COPY Player.java /root/game
 COPY Game.java /root/game
 
 # Install JDK
