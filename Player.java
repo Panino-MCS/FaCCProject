@@ -7,8 +7,9 @@ public class Player {
     private int baseMag;
     private int hPotions;
     private int mPotions;
+    private int gold;
     
-    public Player(String name, int hp, int mp, int baseAtk, int baseMag, int hPotions, int mPotions){
+    public Player(String name, int hp, int mp, int baseAtk, int baseMag, int hPotions, int mPotions, int gold){
         this.name = name;
         this.hp = hp;
         this.mp = mp;
@@ -16,6 +17,7 @@ public class Player {
         this.baseMag = baseMag;
         this.hPotions = hPotions;
         this.mPotions = mPotions;
+        this.gold = gold;
     }
 
     public String toString(){
@@ -26,6 +28,7 @@ public class Player {
         result = result + "Mag - " + this.baseMag + "\n";
         result = result + "Health potions held - " + this.hPotions + "\n";
         result = result + "Mana potions held - " + this.mPotions + "\n";
+        result = result + "Gold - " + this.gold + "\n";
 
         return result;
     }
@@ -58,6 +61,10 @@ public class Player {
         return this.mPotions;
     }
 
+    public int getGold(){
+        return this.gold;
+    }
+
     public void setName(String name){
         this.name = name;
     }
@@ -84,6 +91,10 @@ public class Player {
 
     public void setMPotions(int mPotions){
         this.mPotions = mPotions;
+    }
+
+    public void setGold(int gold){
+        this.gold = gold;
     }
 
   }
