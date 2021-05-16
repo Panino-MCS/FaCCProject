@@ -35,10 +35,31 @@ public class Game {
   }
 
   private static void menuSelection(int selection, Player p){
+
+    Enemy e1 = new Enemy("Goblin", 30, 5, 10, 15, 20);
+    Enemy e2 = new Enemy("Bandit", 45, 8, 13, 18, 35);
+    Enemy e3 = new Enemy("Orc", 75, 15, 25, 40, 50);
+
     switch(selection){
       case 1:
         //Fight
-        System.out.println("Figth!");
+        int encounter = getRandomNumber(0, 3);
+        Enemy enemy = null;
+        switch(encounter){
+          case 0:
+            enemy = e1;
+            break;
+          case 1:
+            enemy = e2;
+            break;
+          case 2:
+            enemy = e3;
+            break;
+          default:
+            break;
+        }
+        System.out.println("--- New Encounter (" + enemy.getName() + ") ---");
+        startNewTurn(p, enemy);
         break;
       case 2:
         //Merchant
@@ -55,8 +76,7 @@ public class Game {
     }
   }
 
-  private static void pressEnterKeyToContinue()
-  { 
+  private static void pressEnterKeyToContinue(){ 
     System.out.println("\nPress Enter key to continue...");
     try
     {
@@ -165,4 +185,16 @@ public class Game {
         break;
     }
   }
+
+  public static void startNewTurn(Player p, Enemy enemy){
+        System.out.println("- Enemy Status -");
+        System.out.println(enemy.fightStatus());
+        System.out.println("- Player Status -");
+        System.out.println(p.fightStatus());
+  }
+
+  public static int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
+  }
+
 }

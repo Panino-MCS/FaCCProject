@@ -1,18 +1,22 @@
 public class Player {
     
     private String name;
-    private int hp;
-    private int mp;
+    private int maxHp;
+    private int maxMp;
+    private int actualHp;
+    private int actualMp;
     private int baseAtk;
     private int baseMag;
     private int hPotions;
     private int mPotions;
     private int gold;
     
-    public Player(String name, int hp, int mp, int baseAtk, int baseMag, int hPotions, int mPotions, int gold){
+    public Player(String name, int maxHp, int maxMp, int baseAtk, int baseMag, int hPotions, int mPotions, int gold){
         this.name = name;
-        this.hp = hp;
-        this.mp = mp;
+        this.maxHp = maxHp;
+        this.maxMp = maxMp;
+        this.actualHp = maxHp;
+        this.actualMp = maxMp;
         this.baseAtk = baseAtk;
         this.baseMag = baseMag;
         this.hPotions = hPotions;
@@ -22,8 +26,8 @@ public class Player {
 
     public String toString(){
         String result = "Player : \"" + this.name + "\"\n";
-        result = result + "Hp - " + this.hp + "\n";
-        result = result + "Mp - " + this.mp + "\n";
+        result = result + "Hp - " + this.actualHp + "/" + this.maxHp + "\n";
+        result = result + "Mp - " + this.actualMp + "/" + this.maxMp + "\n";
         result = result + "Atk - " + this.baseAtk + "\n";
         result = result + "Mag - " + this.baseMag + "\n";
         result = result + "Health potions held - " + this.hPotions + "\n";
@@ -33,16 +37,33 @@ public class Player {
         return result;
     }
 
+    public String fightStatus(){
+        String result = "";
+        result = result + "Player: " + this.name + "\n";
+        result = result + "Hp: " + this.actualHp + "/" + this.maxHp + "\n";
+        result = result + "Mp: " + this.actualMp + "/" + this.maxMp + "\n";
+        result = result + "Health/Mana potion: " + this.hPotions + " / " + this.mPotions + "\n";
+        return result;
+    }
+
     public String getName(){
         return this.name;
     }
 
-    public int getHp(){
-        return this.hp;
+    public int getMaxHp(){
+        return this.maxHp;
     }
 
-    public int getMp(){
-        return this.mp;
+    public int getMaxMp(){
+        return this.maxMp;
+    }
+
+    public int getActualHp(){
+        return this.actualHp;
+    }
+
+    public int getActualMp(){
+        return this.actualMp;
     }
 
     public int getBaseAtk(){
@@ -69,12 +90,20 @@ public class Player {
         this.name = name;
     }
 
-    public void setHp(int newHp){
-        this.hp = newHp;
+    public void setMaxHp(int newHp){
+        this.maxHp = newHp;
     }
 
-    public void setMp(int newMp){
-        this.mp = newMp;
+    public void setMaxMp(int newMp){
+        this.maxMp = newMp;
+    }
+
+    public void setActualHp(int newHp){
+        this.actualHp = newHp;
+    }
+
+    public void setActualMp(int newMp){
+        this.actualMp = newMp;
     }
 
     public void setBaseAtk(int baseAtk){
