@@ -25,6 +25,23 @@ public class Enemy {
         return result;
     }
 
+    public void action(Player p){
+        System.out.println("The " + this.name + " performs his action!\n");
+        int atk = getRandomNumber(0, 100);
+        int dmg = 0;
+        if(atk < 50){
+            dmg = this.atk1;
+            System.out.println("It's a weak attack! It dealt " + dmg + " damage!\n");
+        } else if (atk < 80){
+            dmg = getRandomNumber(this.atk1, this.atk2 + 1);
+            System.out.println("It's a strong attack! It dealt " + dmg + " damage!\n");
+        } else {
+            dmg = getRandomNumber(this.atk2, this.atk3 + 1);
+            System.out.println("It was a critical attack! It dealt " + dmg + " damage!\n");
+        }
+        p.setActualHp(p.getActualHp() - dmg);
+    }
+
     public String getName(){
         return this.name;
     }
@@ -79,6 +96,10 @@ public class Enemy {
 
     public void setRewardGold(int rewardGold){
         this.rewardGold = rewardGold;
+    }
+
+    private int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
     }
 
 }

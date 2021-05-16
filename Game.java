@@ -187,11 +187,61 @@ public class Game {
   }
 
   public static void startNewTurn(Player p, Enemy enemy){
+        System.out.println("-- New Turn --");
         System.out.println("- Enemy Status -");
         System.out.println(enemy.fightStatus());
         System.out.println("- Player Status -");
-        System.out.println(p.fightStatus());
+        System.out.println(p.fightStatus() + "\n");
+        
+        System.out.println("Actions: ");
+        System.out.println("\"1\" -> Swing your sword");
+        System.out.println("\"2\" -> Cast a fire ball (costs 30 mana points)");
+        System.out.println("\"3\" -> Drink an health potion");
+        System.out.println("\"4\" -> Drink a mana potion");
+        
+        Scanner scanchoice = new Scanner(System.in);
+        int choiceentry = 0;
+
+        if(scanchoice.hasNextInt()){
+          choiceentry = scanchoice.nextInt();
+          if(choiceentry > 1 || choiceentry <= 4){
+            switch(choiceentry){
+              case 1:
+                p.swingSword(enemy);
+                break;
+              case 2:
+                p.castFire(enemy);
+                break;
+              case 3:
+                p.drinkHpPotion();
+                break;
+              case 4:
+                p.drinkMpPotion();
+                break;
+              default:
+                break;
+            }
+          }
+        }
+        else {
+          System.out.println("Not a valid option!\n");
+          System.out.println("You lost your turn!\n");
+          String discard = scanchoice.nextLine();
+        }
+
+        if(enemy.getActualHp() > 0){
+          enemy.action(p);
+          if(p.getActualHp() > 0){
+            startNewTurn(p, enemy);
+          } else {
+            System.out.println("You Lost!");
+          }
+        } else {
+          System.out.println("You won! You loot " + enemy.getRewardGold() + " pieces of gold!");
+          p.setGold(p.getGold() + enemy.getRewardGold());
+        }
   }
+
 
   public static int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
